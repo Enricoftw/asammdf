@@ -7387,6 +7387,8 @@ class MDF4(MDF_Common[Group]):
                                 if np.dtype(view) != vals.dtype:
                                     vals = vals.view(view)
 
+                        if not channel.flags & (v4c.FLAG_CN_ALL_INVALID | v4c.FLAG_CN_INVALIDATION_PRESENT):
+                            invalidation_bits = None
                         extracted_signals.append((vals, invalidation_bits))
 
                     if master_is_required:

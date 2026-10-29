@@ -4652,6 +4652,8 @@ class MDF:
             for pair, (raw_data, invalidation_bits) in zip(pairs, raw_and_invalidation, strict=False):
                 ch_index = pair[-1]
                 channel = grp.channels[ch_index]
+                if not channel.flags & (v4c.FLAG_CN_ALL_INVALID | v4c.FLAG_CN_INVALIDATION_PRESENT):
+                    invalidation_bits = None
                 channel_dtype, byte_size, byte_offset, bit_offset = grp.record[ch_index]
                 vals = np.frombuffer(raw_data, dtype=channel_dtype)
 
